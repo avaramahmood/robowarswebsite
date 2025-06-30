@@ -114,8 +114,8 @@ const Contact = () => {
                       </span>
                            {" "}
                       <p className="tw-text-gray-50">
-                        SECRETARY
-                        <br />
+                        SECRETARy
+                        <br/>
                         Ph : 7875115111
                       </p>
                          {" "}
