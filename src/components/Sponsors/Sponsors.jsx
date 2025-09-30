@@ -17,8 +17,9 @@ const Sponsors = () => {
   }
   return (
     <>
-      <h2 class="sponsersText"> Sponsors</h2>
 
+      <h2 class="sponsersText"> Sponsors</h2>
+<div className="tw-mt-24">
       <motion.div
         class="sponsors-section"
         ref={ref}
@@ -31,12 +32,13 @@ const Sponsors = () => {
         transition={{ duration: 1 }}
       >
         <div class="sponsor-image autodesk">
-          <img src={autodesk} alt="" />
+          <img src="/siemens.svg" alt="" className="tw-w-96" />
         </div>
         <div class="sponsor-image altium">
-          <img src={altium} alt="" />
+          <img src="adi.svg" alt=""  className="tw-w-72"/>
         </div>
       </motion.div>
+      </div>
     </>
   );
 };
