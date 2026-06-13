@@ -20,26 +20,31 @@ const SPONSORS = [
   },
 ];
 
+const SHEET_ENDPOINT = import.meta.env.VITE_SPONSOR_SHEET_URL;
+
 const Sponsors = () => {
   const headRef = useReveal(0.2);
   const gridRef = useReveal(0.15);
   const ctaRef = useReveal(0.2);
 
   const [email, setEmail] = useState("");
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState("idle"); // idle | loading | done | error
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const trimmed = email.trim();
     if (!trimmed || !trimmed.includes("@")) return;
-    window.location.href =
-      `mailto:robovitics@vit.ac.in` +
-      `?subject=${encodeURIComponent("Sponsorship Inquiry — Robowars '26")}` +
-      `&body=${encodeURIComponent(
-        `I messaged from robowars website I'm interested to sponsor!\n\nContact email: ${trimmed}`
-      )}`;
-    setSent(true);
-    setEmail("");
+    setStatus("loading");
+    try {
+      await fetch(
+        `${SHEET_ENDPOINT}?email=${encodeURIComponent(trimmed)}&ts=${Date.now()}`,
+        { mode: "no-cors" }
+      );
+      setStatus("done");
+      setEmail("");
+    } catch {
+      setStatus("error");
+    }
   };
 
   return (
@@ -84,8 +89,8 @@ const Sponsors = () => {
               className="sponsors-email-input"
               required
             />
-            <button type="submit" className="rw-btn">
-              {sent ? "Email Opened ✓" : "Get in Touch"}
+            <button type="submit" className="rw-btn" disabled={status === "loading" || status === "done"}>
+              {status === "done" ? "Received ✓" : status === "loading" ? "Sending…" : status === "error" ? "Try Again" : "Get in Touch"}
             </button>
           </form>
         </div>

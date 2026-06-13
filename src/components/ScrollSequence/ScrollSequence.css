@@ -211,7 +211,7 @@
 
 .seq-title {
   font-family: var(--rw-font-display);
-  font-size: clamp(3.5rem, 11vw, 8rem);
+  font-size: clamp(2rem, 11vw, 8rem);
   line-height: 1;
   letter-spacing: 0.06em;
   color: var(--rw-text);
@@ -258,6 +258,37 @@
 
 .seq-content .rw-btn--ghost {
   clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+}
+
+/* ---- static hero (portrait phones) ---- */
+
+.seq-wrapper.seq-static {
+  height: 100vh;
+}
+
+.seq-static-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.seq-static .seq-scrim {
+  opacity: 1;
+}
+
+.seq-static .seq-content {
+  pointer-events: auto;
+}
+
+.seq-static .seq-content > * {
+  opacity: 1;
+  transform: none;
+  filter: none;
+  transition: none;
 }
 
 @media (max-width: 768px) {

@@ -41,6 +41,16 @@ const ScrollSequence = () => {
   const [firstFrameReady, setFirstFrameReady] = useState(false);
   const [revealed, setRevealed] = useState(false);
   const [cueVisible, setCueVisible] = useState(true);
+  const [isPortraitMobile, setIsPortraitMobile] = useState(
+    () => window.innerWidth <= 820 && window.innerHeight > window.innerWidth
+  );
+
+  useEffect(() => {
+    const check = () =>
+      setIsPortraitMobile(window.innerWidth <= 820 && window.innerHeight > window.innerWidth);
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
   const drawFrame = useCallback((index) => {
     const canvas = canvasRef.current;
@@ -61,6 +71,7 @@ const ScrollSequence = () => {
   // Preload: first frame immediately, then a coarse pass (every ~6th frame)
   // so scrubbing responds right away, then fill in the rest.
   useEffect(() => {
+    if (isPortraitMobile) return;
     let cancelled = false;
     const size = window.innerWidth <= 820 ? "sm" : "lg";
     const images = new Array(FRAME_COUNT);
@@ -92,9 +103,10 @@ const ScrollSequence = () => {
     return () => {
       cancelled = true;
     };
-  }, [drawFrame]);
+  }, [drawFrame, isPortraitMobile]);
 
   useEffect(() => {
+    if (isPortraitMobile) return;
     const canvas = canvasRef.current;
     let raf;
 
@@ -183,7 +195,41 @@ const ScrollSequence = () => {
       window.removeEventListener("resize", resize);
       window.removeEventListener("scroll", onScroll);
     };
-  }, [drawFrame]);
+  }, [drawFrame, isPortraitMobile]);
+
+  if (isPortraitMobile) {
+    return (
+      <div className="seq-wrapper seq-static" id="hero">
+        <div className="seq-sticky">
+          <img
+            className="seq-static-bg"
+            src="/scroll_animation/sm/0084.webp"
+            alt=""
+          />
+          <div className="seq-scrim" />
+          <div className="seq-content">
+            <p className="seq-kicker">graVITas '26 · VIT Vellore</p>
+            <h1 className="seq-title">ROBOWARS</h1>
+            <p className="seq-tagline">
+              Forge <span>·</span> Battle <span>·</span> Wreck
+            </p>
+            <p className="seq-desc">
+              India's biggest combat robotics championship. Forty war machines,
+              one arena — witness the clash live.
+            </p>
+            <div className="seq-buttons">
+              <a className="rw-btn" href={YT_URL} target="_blank" rel="noopener noreferrer">
+                Watch Live
+              </a>
+              <a className="rw-btn rw-btn--ghost" href="https://drive.google.com/uc?export=download&id=1CvdzntBlzWyqLViS8DLlV-l8wyV2ouu-" target="_blank" rel="noopener noreferrer">
+                Rulebook
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="seq-wrapper" id="hero" ref={wrapperRef}>

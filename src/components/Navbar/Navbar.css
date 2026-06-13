@@ -182,3 +182,13 @@
     height: 32px;
   }
 }
+
+@media (max-width: 480px) {
+  .rw-nav-brand img {
+    height: 22px;
+  }
+
+  .rw-nav-gravitas img {
+    height: 22px;
+  }
+}
