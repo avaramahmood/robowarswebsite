@@ -1,0 +1,303 @@
+.seq-wrapper {
+  position: relative;
+  height: 550vh;
+  background: var(--rw-black);
+}
+
+.seq-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+.seq-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* shimmer while the very first frame streams in */
+.seq-loading {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    110deg,
+    var(--rw-black) 40%,
+    var(--rw-dark) 50%,
+    var(--rw-black) 60%
+  );
+  background-size: 220% 100%;
+  animation: seq-shimmer 1.4s linear infinite;
+}
+
+@keyframes seq-shimmer {
+  from {
+    background-position: 130% 0;
+  }
+  to {
+    background-position: -90% 0;
+  }
+}
+
+/* ---- scroll cue (the only intro element) ---- */
+
+.seq-cue {
+  position: absolute;
+  bottom: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.seq-cue.is-hidden {
+  opacity: 0;
+  transform: translateX(-50%) translateY(8px);
+  pointer-events: none;
+}
+
+/* dark outline — the opening frame is a light arena floor */
+.seq-cue-mouse {
+  width: 40px;
+  height: 64px;
+  border: 2px solid rgba(13, 13, 13, 0.65);
+  border-radius: 22px;
+  display: flex;
+  justify-content: center;
+  padding-top: 12px;
+}
+
+.seq-cue-dot {
+  width: 6px;
+  height: 12px;
+  border-radius: 4px;
+  background: var(--rw-red);
+  animation: seq-cue-roll 1.8s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+@keyframes seq-cue-roll {
+  0% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+  25% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+}
+
+/* ---- sequence progress rail ---- */
+
+.seq-rail {
+  position: absolute;
+  right: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2px;
+  height: 88px;
+  border-radius: 2px;
+  background: rgba(13, 13, 13, 0.18);
+  overflow: hidden;
+  z-index: 2;
+  transition: opacity 0.5s ease;
+}
+
+.seq-rail.is-hidden {
+  opacity: 0;
+}
+
+.seq-rail-fill {
+  width: 100%;
+  height: 100%;
+  background: var(--rw-red);
+  transform-origin: top;
+  transform: scaleY(0);
+}
+
+/* ---- scrim + closing content (bots clash frame) ---- */
+
+.seq-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    rgba(13, 13, 13, 0.5),
+    rgba(13, 13, 13, 0.38) 45%,
+    rgba(13, 13, 13, 0.72)
+  );
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+.is-revealed .seq-scrim {
+  opacity: 1;
+}
+
+.seq-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 1.5rem;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.is-revealed .seq-content {
+  pointer-events: auto;
+}
+
+/* staggered, blur-to-sharp reveal */
+.seq-content > * {
+  opacity: 0;
+  transform: translateY(28px);
+  filter: blur(6px);
+  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.7s ease;
+}
+
+.is-revealed .seq-content > * {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+.is-revealed .seq-content > *:nth-child(1) {
+  transition-delay: 0.05s;
+}
+.is-revealed .seq-content > *:nth-child(2) {
+  transition-delay: 0.14s;
+}
+.is-revealed .seq-content > *:nth-child(3) {
+  transition-delay: 0.23s;
+}
+.is-revealed .seq-content > *:nth-child(4) {
+  transition-delay: 0.32s;
+}
+.is-revealed .seq-content > *:nth-child(5) {
+  transition-delay: 0.41s;
+}
+
+.seq-kicker {
+  display: inline-block;
+  font-family: var(--rw-font-heading);
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #0d0d0d;
+  background: rgba(240, 238, 232, 0.94);
+  padding: 0.35rem 1rem;
+  border-radius: 2px;
+  margin-bottom: 1.4rem;
+}
+
+.seq-title {
+  font-family: var(--rw-font-display);
+  font-size: clamp(3.5rem, 11vw, 8rem);
+  line-height: 1;
+  letter-spacing: 0.06em;
+  color: var(--rw-text);
+  text-shadow: 0 4px 40px rgba(13, 13, 13, 0.9), 0 8px 60px rgba(13, 13, 13, 0.8);
+}
+
+.seq-tagline {
+  font-family: var(--rw-font-heading);
+  font-weight: 600;
+  font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--rw-text);
+  margin-top: 1.3rem;
+}
+
+.seq-tagline span {
+  color: var(--rw-red-light);
+  margin: 0 0.35em;
+}
+
+.seq-desc {
+  max-width: 500px;
+  margin-top: 1.2rem;
+  font-size: clamp(1rem, 1.7vw, 1.15rem);
+  line-height: 1.7;
+  color: var(--rw-text);
+}
+
+.seq-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2.6rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Angular "edgy" buttons — hero page only */
+.seq-content .rw-btn {
+  border-radius: 2px;
+  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+  padding: 0.9rem 2.3rem;
+}
+
+.seq-content .rw-btn--ghost {
+  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+}
+
+@media (max-width: 768px) {
+  .seq-wrapper {
+    height: 400vh;
+  }
+
+  .seq-rail {
+    right: 1.1rem;
+  }
+
+  .seq-kicker {
+    font-size: 0.82rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .seq-wrapper {
+    height: 350vh;
+  }
+
+  .seq-rail {
+    display: none;
+  }
+
+  .seq-tagline {
+    letter-spacing: 0.06em;
+  }
+
+  .seq-desc {
+    font-size: 0.95rem;
+  }
+
+  .seq-buttons {
+    gap: 0.65rem;
+    margin-top: 1.8rem;
+  }
+
+  .seq-content .rw-btn {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.88rem;
+  }
+}

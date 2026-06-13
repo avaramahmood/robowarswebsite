@@ -1,99 +1,67 @@
-import React, { useEffect, useRef } from "react";
-import "./Cursoranimation.css"; // Import the CSS file for styling
+import { useEffect, useRef } from "react";
+import "./Cursoranimation.css";
 
-const CircleEffect = () => {
-  const circlesRef = useRef([]);
-  const colors = [
-    "#ffb56b",
-    "#fdaf69",
-    "#f89d63",
-    "#f59761",
-    "#ffb56b",
-    "#fdb063",
-    "#faaa5b",
-    "#f8a453",
-    "#f59f4b",
-    "#f29943",
-    "#ef933b",
-    "#ec8e33",
-    "#e9882b",
-    "#e68223",
-    "#e37c1b",
-    "#e07713",
-    "#dc710b",
-    "#d96b03",
-    "#d66402",
-    "#d35e02",
-    "#d05702",
-    "#cd5101",
-    "#ca4a01",
-    "#c64401",
-    "#c33d01",
-    "#c03601",
-  ];
+const CustomCursor = () => {
+  const dotRef = useRef(null);
+  const ringRef = useRef(null);
+  const pos = useRef({ x: -200, y: -200 });
+  const ring = useRef({ x: -200, y: -200 });
+  const rafRef = useRef(null);
+  const styleRef = useRef(null);
 
   useEffect(() => {
-    const circles = circlesRef.current;
-    const coords = { x: 0, y: 0 };
+    // Inject cursor:none globally while this component is mounted
+    const style = document.createElement("style");
+    style.textContent = "*, *::before, *::after { cursor: none !important; }";
+    document.head.appendChild(style);
+    styleRef.current = style;
 
-    // Set initial properties for circles
-    circles.forEach((circle, index) => {
-      circle.x = 0;
-      circle.y = 0;
-      circle.style.backgroundColor = colors[index % colors.length];
-    });
-
-    // Mouse move event handler
-    const handleMouseMove = (e) => {
-      coords.x = e.clientX;
-      coords.y = e.clientY;
+    const onMove = (e) => {
+      pos.current = { x: e.clientX, y: e.clientY };
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
-
-    // Animation loop
-    const animateCircles = () => {
-      let x = coords.x;
-      let y = coords.y;
-
-      circles.forEach((circle, index) => {
-        circle.style.left = `${x - 12}px`;
-        circle.style.top = `${y - 12}px`;
-        circle.style.transform = `scale(${
-          (circles.length - index) / circles.length
-        })`;
-
-        circle.x = x;
-        circle.y = y;
-
-        const nextCircle = circles[index + 1] || circles[0];
-        x += (nextCircle.x - x) * 0.3;
-        y += (nextCircle.y - y) * 0.3;
-      });
-
-      requestAnimationFrame(animateCircles);
+    const onOver = (e) => {
+      const hovered = e.target.closest("a, button, [role='button'], input, label, select, textarea");
+      if (hovered) {
+        dotRef.current?.classList.add("is-hover");
+        ringRef.current?.classList.add("is-hover");
+      } else {
+        dotRef.current?.classList.remove("is-hover");
+        ringRef.current?.classList.remove("is-hover");
+      }
     };
 
-    animateCircles();
+    const tick = () => {
+      const { x, y } = pos.current;
+      if (dotRef.current) {
+        dotRef.current.style.transform = `translate(${x}px, ${y}px)`;
+      }
+      ring.current.x += (x - ring.current.x) * 0.1;
+      ring.current.y += (y - ring.current.y) * 0.1;
+      if (ringRef.current) {
+        ringRef.current.style.transform = `translate(${ring.current.x}px, ${ring.current.y}px)`;
+      }
+      rafRef.current = requestAnimationFrame(tick);
+    };
 
-    // Cleanup
+    window.addEventListener("mousemove", onMove);
+    window.addEventListener("mouseover", onOver);
+    rafRef.current = requestAnimationFrame(tick);
+
     return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("mouseover", onOver);
+      cancelAnimationFrame(rafRef.current);
+      styleRef.current?.remove();
     };
-  }, [colors]);
+  }, []);
 
   return (
-    <div>
-      {Array.from({ length: 20 }).map((_, index) => (
-        <div
-          key={index}
-          className="circle"
-          ref={(el) => (circlesRef.current[index] = el)}
-          style={{ position: "absolute" }}
-        />
-      ))}
-    </div>
+    <>
+      <div ref={dotRef} className="rw-cursor-dot" />
+      <div ref={ringRef} className="rw-cursor-ring" />
+    </>
   );
 };
 
-export default CircleEffect;
+export default CustomCursor;

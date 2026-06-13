@@ -24,7 +24,7 @@ h1.herologo {
 
 .title {
   text-align: center;
-  color: #d64e2e;
+  color: #C0122A;
   font-weight: bolder;
   font-size: 40px;
   font-family: "Russo One", sans-serif;
@@ -55,7 +55,7 @@ h1.herologo {
 }
 
 .content h2 {
-  color: #d64e2e;
+  color: #C0122A;
   font-weight: bolder;
   font-size: 30px;
   display: flex;
@@ -80,7 +80,7 @@ h1.herologo {
 
 .buttons button {
   padding: 10px 20px;
-  border: 2px solid #d64e2e;
+  border: 2px solid #C0122A;
   border-radius: 20px;
   color: white;
   font-size: 18px;
@@ -88,7 +88,7 @@ h1.herologo {
 }
 
 .watch-live {
-  background-color: #d64e2e;
+  background-color: #C0122A;
 }
 
 .matches {
@@ -98,7 +98,7 @@ h1.herologo {
 
 button:hover {
   background-color: white;
-  color: #d64e2e;
+  color: #C0122A;
 }
 @media (max-width: 1300px) {
   #three-robot-model {

@@ -1,37 +1,92 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap");
+
 @font-face {
-  font-family: "Sd Robotics";
-  src: url("/public/robtronika-font/Robtronika-3lZyy.ttf") format("truetype");
+  font-family: "Ethnocentric";
+  src: url("/fonts/ethnocentric-rg.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
+
+@font-face {
+  font-family: "Sd Robotics";
+  src: url("/robtronika-font/Robtronika-3lZyy.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --rw-red: #c0122a;
+  --rw-red-dark: #8b0d1e;
+  --rw-red-light: #e8223f;
+  --rw-black: #0d0d0d;
+  --rw-dark: #1a1a1a;
+  --rw-surface: #242424;
+  --rw-card: #1e1e1e;
+  --rw-text: #f0eee8;
+  --rw-muted: #999999;
+  --rw-silver: #b0ada6;
+  --rw-gold: #c8960a;
+  --rw-border: rgba(192, 18, 42, 0.35);
+  --rw-hairline: rgba(240, 238, 232, 0.08);
+  --rw-font-display: "Ethnocentric", "Sd Robotics", "Space Grotesk", sans-serif;
+  --rw-font-heading: "Space Grotesk", sans-serif;
+  --rw-font-body: "Inter", sans-serif;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* Lenis drives smooth scrolling — native smooth would double-ease */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
 body {
-  background-color: #000;
-  color: #fff;
-  font-family: "Roboto Slab", serif;
+  background-color: var(--rw-black);
+  color: var(--rw-text);
+  font-family: var(--rw-font-body);
   font-optical-sizing: auto;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--rw-red);
+  color: var(--rw-text);
 }
 
 ::-webkit-scrollbar {
-  width: 0px;
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: var(--rw-black);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--rw-surface);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--rw-red-dark);
 }
 
 a {
-  color: #000000;
+  color: var(--rw-text);
   text-decoration: none;
 }
 
 a:hover {
-  color: #d9ba85;
+  color: var(--rw-red-light);
   text-decoration: none;
 }
 
@@ -40,47 +95,59 @@ section {
   overflow: hidden;
 }
 
-.row {
-  --bs-gutter-x: 1.5rem;
-  /* --bs-gutter-y: 0; */
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: center;
-  /* margin-top: calc(-1 * var(--bs-gutter-y)); */
-  /* margin-right: calc(-.5 * var(--bs-gutter-x)); */
-  /* margin-left: calc(-.5 * var(--bs-gutter-x)); */
-  margin-top: 4rem;
-  gap: 24px;
-}
-
-.aboutUs,
-.aboutgravitas,
-.media,
-.faq,
-.contactus {
-  display: flex;
-  align-items: center;
-  padding-top: 5rem;
-  padding-bottom: 5rem;
-  flex-direction: column;
-  gap: 2rem;
-}
-.featurette-heading {
-  font-family: "Sd Robotics", serif;
-}
+/* Section headings — clean, modern, red used as a quiet accent */
 .aboutUsText,
 .aboutgravitasText,
 .mediaText,
 .faqText,
 .sponsersText,
 .contactUsText {
-  color: #fff;
-  text-decoration: underline;
-  text-underline-offset: 0.25em;
+  position: relative;
+  color: var(--rw-text);
   text-align: center;
-  font-size: 2.5rem;
-  margin-top: 15%;
-  font-family: "Sd Robotics", serif;
+  font-family: var(--rw-font-heading);
+  font-weight: 600;
+  font-size: clamp(1.9rem, 4vw, 2.9rem);
+  letter-spacing: -0.02em;
+  margin-top: 7rem;
+}
+
+.aboutUsText::before,
+.aboutgravitasText::before,
+.mediaText::before,
+.faqText::before,
+.sponsersText::before,
+.contactUsText::before {
+  content: "";
+  display: block;
+  width: 32px;
+  height: 2px;
+  margin: 0 auto 1.1rem;
+  border-radius: 2px;
+  background: var(--rw-red-light);
+}
+
+/* Legacy bootstrap-era structural helpers still used by inner pages */
+.row {
+  --bs-gutter-x: 1.5rem;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  margin-top: 4rem;
+  gap: 24px;
+}
+
+.container-fluid {
+  opacity: 1;
+  transform: none;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.img-fluid {
+  width: 18rem;
+  height: 200px;
 }
 
 .fst-italic {
@@ -89,97 +156,98 @@ section {
   word-spacing: 8px;
 }
 
-.container-fluid {
-  opacity: 1;
-  -webkit-transform: none;
-  transform: none;
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  /* gap: 23px;*/
+.featurette-heading {
+  font-family: var(--rw-font-heading);
 }
 
-.img-fluid {
-  /* max-width: 100%; */
-  /* height: auto; */
-  /* height: 1000px; */
-  width: 18rem;
-  height: 200px;
-}
-
-#playButton {
-  position: relative;
-  /* padding: 10px 20px; */
-  border-radius: 50%;
-  border: 1px solid #717d8f;
-  font-size: 14px;
-  text-transform: uppercase;
+/* Section heading system used by the 2026 landing sections */
+.section-kicker {
+  font-family: var(--rw-font-heading);
+  font-size: 0.82rem;
   font-weight: 600;
-  letter-spacing: 2px;
-  background: #717d8f;
-  color: #fff;
-  overflow: hidden;
-  box-shadow: 0 0 0 0 transparent;
-  -webkit-transition: all 0.2s ease-in;
-  -moz-transition: all 0.2s ease-in;
-  transition: all 0.2s ease-in;
-  width: 90px !important;
-  height: 90px !important;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--rw-red-light);
+  margin-bottom: 1rem;
 }
 
-#playButton:hover {
-  background: rgb(41 241 208);
-  box-shadow: 0 0 30px 5px rgba(0, 126, 161, 0);
-  -webkit-transition: all 0.2s ease-out;
-  -moz-transition: all 0.2s ease-out;
-  transition: all 0.2s ease-out;
+.section-heading {
+  font-family: var(--rw-font-heading);
+  font-weight: 700;
+  font-size: clamp(2.3rem, 5.5vw, 4rem);
+  letter-spacing: -0.03em;
+  line-height: 1.06;
+  color: var(--rw-text);
+  margin: 0;
 }
 
-#playButton:hover::before {
-  -webkit-animation: sh02 0.5s 0s linear;
-  -moz-animation: sh02 0.5s 0s linear;
-  animation: sh02 0.5s 0s linear;
+.section-heading em {
+  font-style: normal;
+  color: var(--rw-red-light);
 }
 
-#playButton::before {
-  content: "";
-  display: block;
-  width: 0px;
-  height: 86%;
-  position: absolute;
-  top: 7%;
-  left: 0%;
+/* Scroll-reveal utility — pair with useReveal() */
+.reveal {
   opacity: 0;
-  background: #fff;
-  box-shadow: 0 0 50px 30px #fff;
-  -webkit-transform: skewX(-20deg);
-  -moz-transform: skewX(-20deg);
-  -ms-transform: skewX(-20deg);
-  -o-transform: skewX(-20deg);
-  transform: skewX(-20deg);
+  transform: translateY(36px);
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@keyframes sh02 {
-  from {
-    opacity: 0;
-    left: 0%;
-  }
+.reveal.is-in {
+  opacity: 1;
+  transform: translateY(0);
+}
 
-  50% {
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
     opacity: 1;
-  }
-
-  to {
-    opacity: 0;
-    left: 100%;
+    transform: none;
+    transition: none;
   }
 }
 
-#playButton:active {
-  box-shadow: 0 0 0 0 transparent;
-  -webkit-transition: box-shadow 0.2s ease-in;
-  -moz-transition: box-shadow 0.2s ease-in;
-  transition: box-shadow 0.2s ease-in;
+/* Shared button language — modern pills, red as the primary accent */
+.rw-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--rw-font-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
+  padding: 0.85rem 2.1rem;
+  color: var(--rw-text);
+  background: var(--rw-red);
+  border: 1px solid transparent;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+}
+
+.rw-btn:hover {
+  transform: translateY(-2px);
+  background: var(--rw-red-light);
+  box-shadow: 0 12px 32px -8px rgba(192, 18, 42, 0.55);
+}
+
+.rw-btn:active {
+  transform: translateY(0);
+}
+
+.rw-btn--ghost {
+  background: rgba(240, 238, 232, 0.06);
+  border-color: rgba(240, 238, 232, 0.16);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: var(--rw-text);
+}
+
+.rw-btn--ghost:hover {
+  background: rgba(240, 238, 232, 0.12);
+  border-color: rgba(240, 238, 232, 0.3);
+  box-shadow: 0 12px 32px -12px rgba(0, 0, 0, 0.6);
 }
 
 @media only screen and (max-width: 768px) {
@@ -189,7 +257,7 @@ section {
   .faqText,
   .sponsersText,
   .contactUsText {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     margin-bottom: 1rem;
   }
 }

@@ -16,8 +16,8 @@
   height: 98.3%; /* Ensures iframe maintains full height */
   margin-left: 180px;
   margin-top: 18px;
-  border: 2px solid #d64e2e; /* Thin, shadow-like border */
-  box-shadow: 5px 5px 10px #d64e2e; /* Adds depth with box-shadow */
+  border: 2px solid #C0122A; /* Thin, shadow-like border */
+  box-shadow: 5px 5px 10px #C0122A; /* Adds depth with box-shadow */
 }
 
 @media (max-width: 768px) {

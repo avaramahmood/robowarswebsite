@@ -104,7 +104,7 @@
   border: none;
   padding: 10px 20px;
   font-size: 16px;
-  color: #e06f06;
+  color: #E8223F;
   cursor: pointer;
   position: relative;
   transition: color 0.3s ease;
@@ -115,7 +115,7 @@
   position: absolute;
   width: 0;
   height: 2px;
-  background-color: #e06f06;
+  background-color: #E8223F;
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
@@ -123,7 +123,7 @@
 }
 
 .tournament-navbar button.active {
-  color: #e06f06;
+  color: #E8223F;
 }
 
 .tournament-navbar button.active::after {
@@ -135,8 +135,8 @@
 }
 
 .tournament-navbar button.active {
-  color: #e06f06; /* Change color of active button */
-  border-bottom: 2px solid #e06f06; /* Add underline to active button */
+  color: #E8223F; /* Change color of active button */
+  border-bottom: 2px solid #E8223F; /* Add underline to active button */
 }
 
 .container {
@@ -603,7 +603,7 @@ h2 {
 .home-btn {
   border-radius: 10px;
   min-height: 40px;
-  background-color: #d64e2e;
+  background-color: #C0122A;
   transition: all 0.3s ease-in-out;
   min-width: 100px;
   margin-top: 1%;

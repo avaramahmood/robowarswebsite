@@ -1,83 +1,211 @@
-.gallery {
-  position: relative;
-  margin: 5% 0%;
-  height: 75vh;
+/* ---- Section shell ---- */
+
+.gallery-section {
+  padding: 5.5rem 0 6rem;
 }
 
-.mediaText {
-  margin-top: 15%;
-}
-.gallery .item {
-  position: absolute;
-  width: 23vw;
-  height: 34vh;
-  transition: transform 0.9s, width 0.9s, height 0.9s;
-  border: 2px solid #d64e2e; /* Add border */
-  border-radius: 15px; /* Add border-radius */
-  overflow: hidden; /* Ensure image stays inside the rounded corners */
+.gallery-head {
+  max-width: 1180px;
+  margin: 0 auto 3.5rem;
+  padding: 0 1.5rem;
 }
 
-.gallery .item img {
+/* ---- Horizontal scroll container ---- */
+/* padding-inline = (1 - RATIO) / 2 * 100% = (1 - 0.65) / 2 = 17.5%              */
+/* This centres each snapped slide inside the viewport                              */
+
+.gallery-overflow {
+  display: flex;
+  gap: 20px;                        /* must match GAP constant in Gallery.jsx */
+  align-items: center;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 17.5%;    /* keeps snap point at centre */
+  padding: 2rem 17.5%;             /* side padding = peekaboo space for adjacent slides */
+  scrollbar-width: none;           /* Firefox */
+  -ms-overflow-style: none;        /* IE / Edge legacy */
+  cursor: grab;
+  touch-action: pan-x;
+  user-select: none;
+}
+
+.gallery-overflow:active {
+  cursor: grabbing;
+}
+
+/* hide webkit scrollbar */
+.gallery-overflow::-webkit-scrollbar {
+  display: none;
+}
+
+/* ---- Individual slide ---- */
+
+.g-slide {
+  flex-shrink: 0;
+  height: 460px;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid var(--rw-hairline);
+  scroll-snap-align: center;
+
+  opacity: 0.32;
+  transform: scale(0.91);
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.5s ease;
+}
+
+.g-slide.is-adj {
+  opacity: 0.55;
+  transform: scale(0.96);
+}
+
+.g-slide.is-active {
+  opacity: 1;
+  transform: scale(1);
+  border-color: rgba(192, 18, 42, 0.4);
+}
+
+.g-slide img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Ensure the image is scaled correctly */
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  pointer-events: none; /* prevent image drag interfering with scroll */
 }
 
-.gallery div[data-pos="0"] {
-  width: 43vw;
-  height: 70vh;
-  margin-left: 2%;
-  z-index: 10;
+/* ---- CTA slide ---- */
+
+.g-cta {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  height: 100%;
+  padding: 3.5rem 4rem;
+  text-decoration: none;
+  gap: 0.3rem;
+  background: radial-gradient(ellipse at 80% 50%, rgba(192, 18, 42, 0.55) 0%, transparent 70%),
+    linear-gradient(145deg, #110204 30%, #2a060e 70%, #3e0a14);
 }
 
-div[data-pos="0"] {
-  transform: translate(0, 0);
-}
-div[data-pos="1"] {
-  transform: translate(47vw, 0);
-}
-div[data-pos="2"] {
-  transform: translate(72vw, 0);
-}
-div[data-pos="3"] {
-  transform: translate(47vw, 36vh);
-}
-div[data-pos="4"] {
-  transform: translate(72vw, 36vh);
+.g-cta-pre {
+  font-family: var(--rw-font-heading);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: rgba(240, 238, 232, 0.5);
+  margin: 0;
 }
 
-@media (max-width: 800px) {
-  .gallery {
-    width: 90vw;
-    height: 90vh;
-    margin-top: 10%;
-    margin-left: 5%;
+.g-cta-title {
+  font-family: var(--rw-font-display);
+  font-size: clamp(2.8rem, 5.5vw, 5rem);
+  line-height: 0.95;
+  color: var(--rw-text);
+  letter-spacing: 0.03em;
+  margin: 0.3rem 0 0;
+}
+
+.g-cta-handle {
+  margin-top: 1.6rem;
+  font-family: var(--rw-font-heading);
+  font-size: 1rem;
+  font-weight: 600;
+  color: rgba(240, 238, 232, 0.75);
+  margin-bottom: 0;
+}
+
+.g-cta-arrow {
+  display: block;
+  font-size: 1.8rem;
+  color: var(--rw-text);
+  margin-top: 2rem;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.g-cta:hover .g-cta-arrow {
+  transform: translate(5px, -5px);
+}
+
+/* ---- Footer: dots + counter ---- */
+
+.gallery-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2rem;
+  padding: 0 1.5rem;
+}
+
+.gallery-dots {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.gallery-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(240, 238, 232, 0.15);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition:
+    width 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    background 0.3s ease,
+    border-radius 0.3s ease;
+}
+
+.gallery-dot.is-active {
+  width: 30px;
+  border-radius: 3.5px;
+  background: var(--rw-red-light);
+}
+
+.gallery-counter {
+  font-family: var(--rw-font-heading);
+  font-variant-numeric: tabular-nums;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--rw-muted);
+  letter-spacing: 0.1em;
+  min-width: 4ch;
+}
+
+/* ---- Responsive ---- */
+
+@media (max-width: 860px) {
+  .g-slide {
+    height: 320px;
   }
 
-  .gallery .item {
-    width: 45vw;
-    height: 25vh;
+  .gallery-section {
+    padding: 4rem 0 5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .g-slide {
+    height: 240px;
+    border-radius: 14px;
   }
 
-  .gallery div[data-pos="0"] {
-    width: 90vw;
-    height: 50vh;
-    z-index: 10;
+  .g-cta {
+    padding: 1.6rem 1.4rem;
   }
 
-  div[data-pos="0"] {
-    transform: translate(0, 0);
+  .g-cta-title {
+    font-size: clamp(2rem, 8vw, 2.8rem);
   }
-  div[data-pos="1"] {
-    transform: translate(0, 51vh);
-  }
-  div[data-pos="2"] {
-    transform: translate(0, 76vh);
-  }
-  div[data-pos="3"] {
-    transform: translate(45vw, 51vh);
-  }
-  div[data-pos="4"] {
-    transform: translate(45vw, 76vh);
+
+  .gallery-footer {
+    margin-top: 1.2rem;
   }
 }

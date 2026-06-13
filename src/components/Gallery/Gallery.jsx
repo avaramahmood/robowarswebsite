@@ -1,67 +1,149 @@
-import React, { useRef, useState, useEffect } from "react";
-import { motion, useInView, useAnimation } from "framer-motion";
+import React, { useState, useEffect, useRef, useCallback } from "react";
+import useReveal from "../../hooks/useReveal";
 import "./Gallery.css";
 
-const images = ["https://res.cloudinary.com/dtuqpup4a/image/upload/fl_preserve_transparency/v1727411412/img1_vxxuqd.jpg?_s=public-apps", "https://res.cloudinary.com/dtuqpup4a/image/upload/fl_preserve_transparency/v1727411415/img4_cjreoa.jpg?_s=public-apps", "https://res.cloudinary.com/dtuqpup4a/image/upload/fl_preserve_transparency/v1727411419/img3_zxgemk.jpg?_s=public-apps", "https://res.cloudinary.com/dtuqpup4a/image/upload/fl_preserve_transparency/v1727411415/img4_cjreoa.jpg?_s=public-apps", "https://res.cloudinary.com/dtuqpup4a/image/upload/fl_preserve_transparency/v1727411415/img4_cjreoa.jpg?_s=public-apps"];
+const CDN =
+  "https://res.cloudinary.com/dtuqpup4a/image/upload/fl_preserve_transparency";
+
+const SLIDES = [
+  { type: "image", src: `${CDN}/v1727411412/img1_vxxuqd.jpg?_s=public-apps`, alt: "Combat bots" },
+  { type: "image", src: `${CDN}/v1727411415/img4_cjreoa.jpg?_s=public-apps`, alt: "Arena action" },
+  { type: "image", src: `${CDN}/v1727411419/img3_zxgemk.jpg?_s=public-apps`, alt: "Robot battle" },
+  { type: "image", src: `${CDN}/v1727411417/robovitics_team_hee1en.jpg?_s=public-apps`, alt: "RoboVITics team" },
+  { type: "image", src: `${CDN}/v1727411408/gravitas_vitjpeg_im9ljt.jpg?_s=public-apps`, alt: "graVITas event" },
+  { type: "cta" },
+];
+
+const N       = SLIDES.length;
+const RATIO   = 0.65;  // slide width as fraction of container — must match CSS padding-inline
+const GAP     = 20;    // px — must match CSS gap
 
 const Gallery = () => {
-  const [positions, setPositions] = useState([0, 1, 2, 3, 4]);
-  const controls = useAnimation();
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true });
+  const headRef  = useReveal(0.3);
+  const wrapRef  = useRef(null);
+  const swRef    = useRef(0);    // current slide width in px
+  const activeRef = useRef(0);
+  const fromUser  = useRef(false); // true when active change came from user scroll
 
-  if (inView) {
-    controls.start("visible");
-  }
+  const [active, setActive] = useState(0);
+  const [paused, setPaused] = useState(false);
 
+  // Set slide widths (percentage width is ambiguous on scroll-flex containers)
+  const applyWidths = useCallback(() => {
+    const el = wrapRef.current;
+    if (!el) return;
+    const sw = Math.round(el.offsetWidth * RATIO);
+    swRef.current = sw;
+    el.querySelectorAll(".g-slide").forEach(s => { s.style.width = sw + "px"; });
+  }, []);
+
+  // Programmatic scroll to a slide index
+  const scrollToIdx = useCallback((idx, smooth = true) => {
+    const el = wrapRef.current;
+    if (!el || !swRef.current) return;
+    el.scrollTo({ left: idx * (swRef.current + GAP), behavior: smooth ? "smooth" : "instant" });
+  }, []);
+
+  // Initial setup + window resize
   useEffect(() => {
-    const interval = setInterval(() => {
-      const newPositions = [...positions];
-      const last = newPositions.pop(); // Remove the last element
-      newPositions.unshift(last); // Add it to the beginning
-      setPositions(newPositions);
-    }, 3000); // Change image every 2 seconds
+    applyWidths();
+    scrollToIdx(0, false);
+    const onResize = () => { applyWidths(); scrollToIdx(activeRef.current, false); };
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, [applyWidths, scrollToIdx]);
 
-    return () => clearInterval(interval); // Cleanup interval on unmount
-  }, [positions]);
+  // Whenever active changes for any reason, sync scroll — but skip if the
+  // change itself came from a user scroll (native snap already positioned it)
+  useEffect(() => {
+    activeRef.current = active;
+    if (!fromUser.current) scrollToIdx(active);
+    fromUser.current = false;
+  }, [active, scrollToIdx]);
+
+  // Update active dot / classes as user scrolls
+  const onScroll = useCallback(() => {
+    const el = wrapRef.current;
+    if (!el || !swRef.current) return;
+    const idx = Math.min(
+      Math.max(Math.round(el.scrollLeft / (swRef.current + GAP)), 0),
+      N - 1,
+    );
+    if (idx !== activeRef.current) {
+      fromUser.current = true;
+      setActive(idx);
+    }
+  }, []);
+
+  // Auto-advance every 4 s, pause while user is interacting
+  useEffect(() => {
+    if (paused) return;
+    const id = setInterval(() => setActive(a => (a + 1) % N), 4000);
+    return () => clearInterval(id);
+  }, [paused]);
+
+  const prev = (active - 1 + N) % N;
+  const next = (active + 1) % N;
 
   return (
-    <>
-      <h1 className="mediaText">GALLERY</h1>
-      <motion.div
-        ref={ref}
-        variants={{
-          hidden: { opacity: 0.8, x: -200 },
-          visible: { opacity: 1, x: 0 },
-        }}
-        initial="hidden"
-        animate={controls}
-        transition={{ duration: 1 }}
+    <section className="gallery-section" id="gallery">
+      <div className="gallery-head reveal" ref={headRef}>
+        <p className="section-kicker">Gallery</p>
+        <h2 className="section-heading">From the <em>arena</em></h2>
+      </div>
+
+      <div
+        className="gallery-overflow"
+        ref={wrapRef}
+        onScroll={onScroll}
+        onPointerDown={() => setPaused(true)}
+        onPointerUp={() => setPaused(false)}
+        onPointerLeave={() => setPaused(false)}
       >
-        <div className="gallery">
-          {positions.map((pos, index) => (
+        {SLIDES.map((slide, i) => {
+          const isActive = i === active;
+          const isAdj    = i === prev || i === next;
+          return (
             <div
-              key={index}
-              className="item"
-              data-pos={pos}
-              onClick={() =>
-                setPositions((prevPositions) => {
-                  const newPositions = [...prevPositions];
-                  const heroIndex = newPositions.indexOf(0);
-                  [newPositions[heroIndex], newPositions[index]] = [
-                    newPositions[index],
-                    newPositions[heroIndex],
-                  ];
-                  return newPositions;
-                })
-              }
+              key={i}
+              className={`g-slide ${isActive ? "is-active" : ""} ${isAdj ? "is-adj" : ""}`}
             >
-              <img src={images[index]} alt={`Gallery item ${index}`} />
+              {slide.type === "cta" ? (
+                <a
+                  className="g-cta"
+                  href="https://www.instagram.com/robovitics/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <p className="g-cta-pre">Follow the</p>
+                  <p className="g-cta-title">Build-Up</p>
+                  <p className="g-cta-handle">@robovitics</p>
+                  <span className="g-cta-arrow">↗</span>
+                </a>
+              ) : (
+                <img src={slide.src} alt={slide.alt} loading="lazy" draggable="false" />
+              )}
             </div>
+          );
+        })}
+      </div>
+
+      <div className="gallery-footer">
+        <div className="gallery-dots">
+          {SLIDES.map((_, i) => (
+            <button
+              key={i}
+              className={`gallery-dot ${i === active ? "is-active" : ""}`}
+              onClick={() => { fromUser.current = false; setActive(i); }}
+              aria-label={`Slide ${i + 1}`}
+            />
           ))}
         </div>
-      </motion.div>
-    </>
+        <span className="gallery-counter">
+          {String(active + 1).padStart(2, "0")} / {String(N).padStart(2, "0")}
+        </span>
+      </div>
+    </section>
   );
 };
 

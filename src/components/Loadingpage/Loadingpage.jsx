@@ -1,10 +1,9 @@
 import { motion, useAnimation } from "framer-motion";
 import React, { useEffect, useRef } from "react";
 import "./Loadingpage.css";
-import image from "../../assets/war logo.gif"; // Import the image
+import image from "../../assets/war logo.gif";
 
 const Progressbar = ({ value }) => {
-  // No need to pass `image` as a prop
   const progressRef = useRef(null);
   const controls = useAnimation();
 
@@ -21,7 +20,7 @@ const Progressbar = ({ value }) => {
       className="progressbar-container"
       ref={progressRef}
       variants={{
-        fading: { opacity: 0, y: "100%" }, // Fade out and slide down
+        fading: { opacity: 0, y: "100%" },
       }}
       initial={{
         opacity: 1,
@@ -30,28 +29,18 @@ const Progressbar = ({ value }) => {
       animate={controls}
       transition={{ duration: 1, ease: "easeInOut" }}
     >
-      <div className="logo-container">
-        <img src={image} className="loading-logo" alt="Logo" />
-      </div>
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-        className="bar-contain"
-      >
+      <div className="loading-stack">
+        <img src={image} className="loading-logo" alt="Robowars logo" />
+        <h1 className="loading-title">ROBOWARS</h1>
+        <p className="loading-sub">graVITas '26 · VIT Vellore</p>
         <div className="progressbar">
           <motion.div
             className="bar"
-            animate={{
-              width: `${value}%`, // Animate width based on the progress value
-            }}
-            transition={{
-              ease: "linear", // Smooth linear transition
-            }}
+            animate={{ width: `${value}%` }}
+            transition={{ ease: "linear" }}
           />
         </div>
+        <span className="loading-percent">{Math.round(value)}%</span>
       </div>
     </motion.div>
   );

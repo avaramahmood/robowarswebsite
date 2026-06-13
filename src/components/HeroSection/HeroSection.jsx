@@ -19,7 +19,7 @@ const HeroSection = () => {
   }
 
   const handleMatchesClick = () => {
-    navigate("/fixture");
+    navigate("https://drive.google.com/uc?export=download&id=1CvdzntBlzWyqLViS8DLlV-l8wyV2ouu-");
   };
 
   useEffect(() => {
@@ -140,7 +140,7 @@ const HeroSection = () => {
             Watch Live
           </button>
           <button className="matches" onClick={handleMatchesClick}>
-            Matches
+            RuleBook
           </button>
         </div>
       </div>

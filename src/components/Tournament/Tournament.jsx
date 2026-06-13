@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "./Tournament.css";
-import { createClient } from "@supabase/supabase-js";
+import { supabase } from "../../supabase";
 import Tournament8 from "./Tournament8";
 import Tournament15 from "./Tournament15";
 import Tournament60 from "./Tournament60";
 import { useNavigate } from "react-router-dom";
-
-const supabaseUrl = process.env.REACT_APP_SUPABASE_URL;
-const supabaseKey = process.env.REACT_APP_SUPABASE_KEY;
-const supabase = createClient(supabaseUrl, supabaseKey);
 
 const Tournament = () => {
   const [activeButton, setActiveButton] = useState("8KG");
@@ -19,6 +15,7 @@ const Tournament = () => {
   });
   const navigate = useNavigate();
   const handleFetch = async () => {
+    if (!supabase) return;
     try {
       const { data: match_8, error: error_8 } = await supabase.from("match_8")
         .select(`

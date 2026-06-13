@@ -1,0 +1,128 @@
+.wc {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 5rem 1.5rem;
+}
+
+.wc-head {
+  margin-bottom: 3.5rem;
+}
+
+.wc-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem;
+}
+
+.wc-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  gap: 0.4rem;
+  padding: 2.2rem 2rem 2rem;
+  background: var(--rw-card);
+  border: 1px solid var(--rw-hairline);
+  border-radius: 20px;
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+.wc-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    120% 90% at 50% 115%,
+    rgba(192, 18, 42, 0.22),
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.wc-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(192, 18, 42, 0.45);
+  box-shadow: 0 24px 48px -24px rgba(0, 0, 0, 0.8);
+}
+
+.wc-card:hover::before {
+  opacity: 1;
+}
+
+.wc-kg {
+  font-family: var(--rw-font-heading);
+  font-weight: 700;
+  font-size: clamp(3.4rem, 6vw, 5rem);
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 2px var(--rw-text);
+  transition: color 0.4s ease, -webkit-text-stroke-color 0.4s ease;
+}
+
+.wc-kg em {
+  font-style: normal;
+  font-size: 0.35em;
+  letter-spacing: 0.1em;
+  margin-left: 0.2em;
+}
+
+.wc-card:hover .wc-kg {
+  color: var(--rw-red-light);
+  -webkit-text-stroke-color: transparent;
+}
+
+.wc-name {
+  margin-top: 1.2rem;
+  font-family: var(--rw-font-heading);
+  font-weight: 600;
+  font-size: 1.25rem;
+  color: var(--rw-text);
+}
+
+.wc-desc {
+  font-size: 0.96rem;
+  line-height: 1.7;
+  color: var(--rw-silver);
+}
+
+.wc-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 1.6rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--rw-silver);
+  transition: color 0.3s ease, gap 0.3s ease;
+}
+
+.wc-card:hover .wc-link {
+  color: var(--rw-text);
+  gap: 0.65rem;
+}
+
+@media (max-width: 860px) {
+  .wc-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 540px) {
+  .wc {
+    padding: 3.5rem 1rem;
+  }
+
+  .wc-grid {
+    grid-template-columns: 1fr;
+    gap: 0.9rem;
+  }
+
+  .wc-card {
+    padding: 1.6rem 1.4rem 1.4rem;
+  }
+}
