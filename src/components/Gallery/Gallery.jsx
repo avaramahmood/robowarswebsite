@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import useReveal from "../../hooks/useReveal";
+import { InstagramIcon } from "../icons/SocialIcons";
 import "./Gallery.css";
 
 const CDN =
@@ -92,6 +93,17 @@ const Gallery = () => {
         <h2 className="section-heading">From the <em>arena</em></h2>
       </div>
 
+      <div className="gallery-stage">
+        <button
+          className="gallery-arrow gallery-arrow--prev"
+          onClick={() => { fromUser.current = false; setActive(prev); }}
+          aria-label="Previous slide"
+        >
+          <svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M15 18l-6-6 6-6" />
+          </svg>
+        </button>
+
       <div
         className="gallery-overflow"
         ref={wrapRef}
@@ -115,9 +127,14 @@ const Gallery = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
+                  <span className="g-cta-badge">
+                    <InstagramIcon /> Instagram
+                  </span>
                   <p className="g-cta-pre">Follow the</p>
                   <p className="g-cta-title">Build-Up</p>
-                  <p className="g-cta-handle">@robovitics</p>
+                  <p className="g-cta-handle">
+                    <InstagramIcon /> @robovitics
+                  </p>
                   <span className="g-cta-arrow">↗</span>
                 </a>
               ) : (
@@ -126,6 +143,17 @@ const Gallery = () => {
             </div>
           );
         })}
+      </div>
+
+        <button
+          className="gallery-arrow gallery-arrow--next"
+          onClick={() => { fromUser.current = false; setActive(next); }}
+          aria-label="Next slide"
+        >
+          <svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M9 6l6 6-6 6" />
+          </svg>
+        </button>
       </div>
 
       <div className="gallery-footer">

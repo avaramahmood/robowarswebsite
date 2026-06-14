@@ -9,7 +9,14 @@
   background: transparent;
   border-bottom: 1px solid transparent;
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-    background 0.4s ease, border-color 0.4s ease;
+    background 0.4s ease, border-color 0.4s ease, opacity 0.4s ease;
+}
+
+/* Stay completely hidden until the hero scroll-animation has finished. */
+.rw-nav:not(.rw-nav--ready) {
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
 }
 
 /* whole bar sits at low opacity until you reach for it */

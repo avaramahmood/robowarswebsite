@@ -14,7 +14,7 @@ const ROWS = [
   {
     index: "02",
     title: "RoboVITics",
-    kicker: "The club",
+    kicker: "The Organizers",
     image:
       "https://res.cloudinary.com/dtuqpup4a/image/upload/fl_preserve_transparency/v1727411417/robovitics_team_hee1en.jpg?_s=public-apps",
     text: "The official robotics club of VIT Vellore — a collective of tech enthusiasts who learn, build and compete. Workshops, seminars and hands-on sessions feed remarkable projects and teams that keep bringing home accolades.",

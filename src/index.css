@@ -226,6 +226,13 @@ section {
     box-shadow 0.25s ease, background 0.25s ease, border-color 0.25s ease;
 }
 
+/* keep the label legible — override the global red anchor hover/active */
+.rw-btn:hover,
+.rw-btn:active,
+.rw-btn:focus {
+  color: var(--rw-text);
+}
+
 .rw-btn:hover {
   transform: translateY(-2px);
   background: var(--rw-red-light);

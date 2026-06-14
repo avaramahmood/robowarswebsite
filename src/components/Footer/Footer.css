@@ -63,6 +63,17 @@
   color: var(--rw-red-light);
 }
 
+.footer-social {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.footer-social svg {
+  font-size: 1.15rem;
+  flex-shrink: 0;
+}
+
 .footer-person {
   display: flex;
   flex-direction: column;

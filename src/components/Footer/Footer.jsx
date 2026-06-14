@@ -1,5 +1,11 @@
 import React from "react";
 import { HashLink as Link } from "react-router-hash-link";
+import {
+  InstagramIcon,
+  LinkedInIcon,
+  FacebookIcon,
+  GlobeIcon,
+} from "../icons/SocialIcons";
 import "./Footer.css";
 
 const NAV = [
@@ -10,13 +16,26 @@ const NAV = [
 ];
 
 const SOCIALS = [
-  { href: "https://www.instagram.com/robovitics/", label: "Instagram" },
+  {
+    href: "https://www.instagram.com/robovitics/",
+    label: "Instagram",
+    Icon: InstagramIcon,
+  },
   {
     href: "https://www.linkedin.com/company/robovitics/",
     label: "LinkedIn",
+    Icon: LinkedInIcon,
   },
-  { href: "https://robovitics.in/", label: "robovitics.in" },
-  { href: "https://www.facebook.com/robovitics", label: "Facebook" },
+  {
+    href: "https://robovitics.in/",
+    label: "robovitics.in",
+    Icon: GlobeIcon,
+  },
+  {
+    href: "https://www.facebook.com/robovitics",
+    label: "Facebook",
+    Icon: FacebookIcon,
+  },
 ];
 
 const Footer = () => (
@@ -49,7 +68,9 @@ const Footer = () => (
               href={s.href}
               target="_blank"
               rel="noopener noreferrer"
+              className="footer-social"
             >
+              <s.Icon />
               {s.label}
             </a>
           ))}

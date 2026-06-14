@@ -10,6 +10,51 @@
   padding: 0 1.5rem;
 }
 
+/* ---- Stage (positions arrows over the scroller) ---- */
+
+.gallery-stage {
+  position: relative;
+}
+
+.gallery-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  font-size: 1.5rem;
+  color: var(--rw-text);
+  background: rgba(13, 13, 13, 0.55);
+  border: 1px solid var(--rw-hairline);
+  border-radius: 50%;
+  cursor: pointer;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
+
+.gallery-arrow:hover {
+  background: var(--rw-red);
+  border-color: transparent;
+  transform: translateY(-50%) scale(1.08);
+}
+
+.gallery-arrow:active {
+  transform: translateY(-50%) scale(0.96);
+}
+
+.gallery-arrow--prev {
+  left: 4%;
+}
+
+.gallery-arrow--next {
+  right: 4%;
+}
+
 /* ---- Horizontal scroll container ---- */
 /* padding-inline = (1 - RATIO) / 2 * 100% = (1 - 0.65) / 2 = 17.5%              */
 /* This centres each snapped slide inside the viewport                              */
@@ -92,6 +137,27 @@
     linear-gradient(145deg, #110204 30%, #2a060e 70%, #3e0a14);
 }
 
+.g-cta-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--rw-font-heading);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--rw-text);
+  background: rgba(240, 238, 232, 0.1);
+  border: 1px solid rgba(240, 238, 232, 0.18);
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+  margin-bottom: 1.2rem;
+}
+
+.g-cta-badge svg {
+  font-size: 1.05rem;
+}
+
 .g-cta-pre {
   font-family: var(--rw-font-heading);
   font-size: 0.78rem;
@@ -112,12 +178,20 @@
 }
 
 .g-cta-handle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   margin-top: 1.6rem;
   font-family: var(--rw-font-heading);
   font-size: 1rem;
   font-weight: 600;
   color: rgba(240, 238, 232, 0.75);
   margin-bottom: 0;
+}
+
+.g-cta-handle svg {
+  font-size: 1.2rem;
+  color: var(--rw-text);
 }
 
 .g-cta-arrow {
@@ -188,6 +262,20 @@
 
   .gallery-section {
     padding: 4rem 0 5rem;
+  }
+
+  .gallery-arrow {
+    width: 42px;
+    height: 42px;
+    font-size: 1.2rem;
+  }
+
+  .gallery-arrow--prev {
+    left: 2%;
+  }
+
+  .gallery-arrow--next {
+    right: 2%;
   }
 }
 

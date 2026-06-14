@@ -1,19 +1,19 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import "./ScrollSequence.css";
 
-// TODO: replace with your actual YouTube channel / livestream URL
-const YT_URL = "https://www.youtube.com/@RoboVITics";
+// graVITas registration portal
+const REGISTER_URL = "https://gravitas.vit.ac.in/";
 
-// 85 webp frames rendered from the arena flythrough video:
+// 84 webp frames rendered from the arena flythrough video:
 // top-down logo shot -> camera dives -> the two bots clash at floor level.
-const FRAME_COUNT = 85;
+const FRAME_COUNT = 84;
 const frameUrl = (i, size) =>
   `/scroll_animation/${size}/${String(i).padStart(4, "0")}.webp`;
 
-// The film finishes at 76% of the scroll track; the rest is a dwell zone —
-// a "speedbreaker" that holds the final shot so the reveal gets a beat
-// of rest before the next section arrives.
-const FILM_END = 0.76;
+// The film finishes at 62% of the scroll track; the rest is the dwell zone —
+// a prominent "speedbreaker" that holds the final shot so the reveal gets a
+// long beat of rest (≈1s extra) for people to admire before the next section.
+const FILM_END = 0.62;
 const EASE = 0.14; // frame lerp factor — higher = snappier scrub
 
 // Non-linear frame mapping: the first ~25 frames get 50% of the scroll
@@ -203,7 +203,7 @@ const ScrollSequence = () => {
         <div className="seq-sticky">
           <img
             className="seq-static-bg"
-            src="/scroll_animation/sm/0084.webp"
+            src="/scroll_animation/sm/0083.webp"
             alt=""
           />
           <div className="seq-scrim" />
@@ -218,8 +218,8 @@ const ScrollSequence = () => {
               one arena — witness the clash live.
             </p>
             <div className="seq-buttons">
-              <a className="rw-btn" href={YT_URL} target="_blank" rel="noopener noreferrer">
-                Watch Live
+              <a className="rw-btn" href={REGISTER_URL} target="_blank" rel="noopener noreferrer">
+                Register Now
               </a>
               <a className="rw-btn rw-btn--ghost" href="https://drive.google.com/uc?export=download&id=1CvdzntBlzWyqLViS8DLlV-l8wyV2ouu-" target="_blank" rel="noopener noreferrer">
                 Rulebook
@@ -262,8 +262,8 @@ const ScrollSequence = () => {
             one arena — witness the clash live.
           </p>
           <div className="seq-buttons">
-            <a className="rw-btn" href={YT_URL} target="_blank" rel="noopener noreferrer">
-              Watch Live
+            <a className="rw-btn" href={REGISTER_URL} target="_blank" rel="noopener noreferrer">
+              Register Now
             </a>
             <a className="rw-btn rw-btn--ghost" href="https://drive.google.com/uc?export=download&id=1CvdzntBlzWyqLViS8DLlV-l8wyV2ouu-" target="_blank" rel="noopener noreferrer">
               Rulebook

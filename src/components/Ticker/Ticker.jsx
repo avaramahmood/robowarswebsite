@@ -3,11 +3,10 @@ import "./Ticker.css";
 
 // accent: true = red (event names), accent: false = white (action words / separators)
 const ITEMS = [
-  { text: "GRAVITAS '26", accent: true },
   { text: "FORGE", accent: false },
   { text: "VIT VELLORE", accent: true },
   { text: "BATTLE", accent: false },
-  { text: "ROBOWARS '26", accent: true },
+  { text: "ROBOWARS", accent: true },
   { text: "WRECK", accent: false },
 ];
 

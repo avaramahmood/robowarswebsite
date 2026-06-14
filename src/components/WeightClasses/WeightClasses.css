@@ -66,14 +66,25 @@
 
 .wc-kg em {
   font-style: normal;
+  font-weight: 600;
   font-size: 0.35em;
   letter-spacing: 0.1em;
   margin-left: 0.2em;
+  /* filled text with a hairline stroke — lighter than the big number,
+     but still has some presence */
+  color: var(--rw-text);
+  -webkit-text-stroke: 0.4px var(--rw-text);
+  transition: color 0.4s ease, -webkit-text-stroke-color 0.4s ease;
 }
 
 .wc-card:hover .wc-kg {
   color: var(--rw-red-light);
   -webkit-text-stroke-color: transparent;
+}
+
+.wc-card:hover .wc-kg em {
+  color: var(--rw-red-light);
+  -webkit-text-stroke-color: var(--rw-red-light);
 }
 
 .wc-name {

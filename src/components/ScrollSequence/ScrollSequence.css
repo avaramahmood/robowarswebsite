@@ -1,6 +1,6 @@
 .seq-wrapper {
   position: relative;
-  height: 550vh;
+  height: 650vh;
   background: var(--rw-black);
 }
 
@@ -272,12 +272,21 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
+  /* portrait crop sits right around the true middle of the clash */
+  object-position: 47% 45%;
   display: block;
 }
 
+/* stronger, darker wash on phones — the bright arena floor would otherwise
+   wash out the white title and buttons */
 .seq-static .seq-scrim {
   opacity: 1;
+  background: linear-gradient(
+    to bottom,
+    rgba(13, 13, 13, 0.72),
+    rgba(13, 13, 13, 0.55) 38%,
+    rgba(13, 13, 13, 0.88)
+  );
 }
 
 .seq-static .seq-content {
@@ -293,7 +302,7 @@
 
 @media (max-width: 768px) {
   .seq-wrapper {
-    height: 400vh;
+    height: 470vh;
   }
 
   .seq-rail {
@@ -307,7 +316,7 @@
 
 @media (max-width: 480px) {
   .seq-wrapper {
-    height: 350vh;
+    height: 410vh;
   }
 
   .seq-rail {

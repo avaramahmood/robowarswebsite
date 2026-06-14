@@ -1,21 +1,22 @@
 import React, { useState } from "react";
 import useReveal from "../../hooks/useReveal";
-import robowarsLogo from "../../assets/robowars logo.png";
+import siemensLogo from "../../assets/sponsors/siemens.svg";
+import analogDevicesLogo from "../../assets/sponsors/analogdevices.svg";
 import "./Sponsors.css";
 
 const SPONSORS = [
   {
     tier: "Title Sponsor",
-    src: robowarsLogo,
-    alt: "Sponsor",
-    desc: "Coming soon",
+    src: siemensLogo,
+    alt: "Siemens",
+    scale: 1.7,
     featured: true,
   },
   {
     tier: "Technology Partner",
-    src: robowarsLogo,
-    alt: "Sponsor",
-    desc: "Coming soon",
+    src: analogDevicesLogo,
+    alt: "Analog Devices",
+    scale: 0.9,
     featured: false,
   },
 ];
@@ -66,9 +67,12 @@ const Sponsors = () => {
             >
               <p className="sponsor-card-tier">{s.tier}</p>
               <div className="sponsor-card-logo">
-                <img src={s.src} alt={s.alt} />
+                <img
+                  src={s.src}
+                  alt={s.alt}
+                  style={s.scale ? { transform: `scale(${s.scale})` } : undefined}
+                />
               </div>
-              <p className="sponsor-card-desc">{s.desc}</p>
             </div>
           ))}
         </div>
