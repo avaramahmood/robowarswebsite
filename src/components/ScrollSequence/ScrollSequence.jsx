@@ -215,7 +215,7 @@ const ScrollSequence = () => {
             </p>
             <p className="seq-desc">
               India's biggest combat robotics championship. Forty war machines,
-              one arena — witness the clash live.
+              one arena to witness the clash live.
             </p>
             <div className="seq-buttons">
               <a className="rw-btn" href={REGISTER_URL} target="_blank" rel="noopener noreferrer">
@@ -259,7 +259,7 @@ const ScrollSequence = () => {
           </p>
           <p className="seq-desc">
             India's biggest combat robotics championship. Forty war machines,
-            one arena — witness the clash live.
+            one arena to witness the clash live.
           </p>
           <div className="seq-buttons">
             <a className="rw-btn" href={REGISTER_URL} target="_blank" rel="noopener noreferrer">

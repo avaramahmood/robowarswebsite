@@ -7,17 +7,17 @@ const CLASSES = [
   {
     kg: "8",
     name: "Featherweight",
-    desc: "Fast, vicious and precise — spinners and flippers trading hits at full tilt.",
+    desc: "It's all about speed and precision. Deal damage with spinners and flippers while trading hits at full tilt.",
   },
   {
     kg: "15",
     name: "Middleweight",
-    desc: "The balance of speed and armor. Where strategy starts deciding fights.",
+    desc: "The perfect balance of speed and armor. Hit hard, move fast, and outsmart your opponent with every move.",
   },
   {
     kg: "60",
     name: "Heavyweight",
-    desc: "Raw destructive power. Sparks, shrapnel and the loudest crowd of the night.",
+    desc: "Pure destructive power. Bring the biggest weapons, absorb massive hits, and dominate the arena.",
   },
 ];
 

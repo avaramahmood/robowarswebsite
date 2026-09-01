@@ -79,7 +79,7 @@ const Footer = () => (
       </div>
 
       <div className="footer-bar">
-        <span>© 2026 RoboVITics — The official robotics club of VIT</span>
+        <span>© 2026 RoboVITics · The official robotics club of VIT</span>
         <Link to="/#hero" className="footer-top">
           Back to top ↑
         </Link>

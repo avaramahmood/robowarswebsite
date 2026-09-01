@@ -9,7 +9,7 @@ const ROWS = [
     title: "ROBOWARS",
     kicker: "The event",
     image: AboutImage,
-    text: "The flagship event of graVITas and one of the biggest combat robotics championships in India. More than forty bots battle around the clock in the country's largest and safest arena — teams from across the globe fight for the title with their war machines.",
+    text: "The flagship event of graVITas and one of the biggest combat robotics championships in India. More than forty bots battle around the clock in the country's largest and safest arena, with teams from across the nation competing for the title with their war machines.",
   },
   {
     index: "02",
@@ -17,7 +17,7 @@ const ROWS = [
     kicker: "The Organizers",
     image:
       "https://res.cloudinary.com/dtuqpup4a/image/upload/fl_preserve_transparency/v1727411417/robovitics_team_hee1en.jpg?_s=public-apps",
-    text: "The official robotics club of VIT Vellore — a collective of tech enthusiasts who learn, build and compete. Workshops, seminars and hands-on sessions feed remarkable projects and teams that keep bringing home accolades.",
+    text: "RoboVITics is VIT Vellore’s founding and most formidable technical institution, and a premier community of innovators dedicated to robotics, automation, and innovation. Comprising a community of technology enthusiasts, the club is committed to relentless research, developing advanced autonomous systems, and competitively implementing solutions that set the standard for robotics and automation.",
   },
   {
     index: "03",
@@ -25,7 +25,7 @@ const ROWS = [
     kicker: "The festival",
     image:
       "https://res.cloudinary.com/dtuqpup4a/image/upload/fl_preserve_transparency/v1727411408/gravitas_vitjpeg_im9ljt.jpg?_s=public-apps",
-    text: "VIT's annual techno-management carnival — a platform that brings together innovative events across every field of engineering. Workshops, competitions, exhibitions: a celebration of knowledge, creativity and machines.",
+    text: "As VIT Vellore's flagship techno-management festival, graVITas unites innovation, engineering, and creativity on one dynamic platform. From hackathons and robotics competitions to expert led workshops and cutting edge exhibitions, every event is designed to inspire collaboration, ignite curiosity, and transform ideas into impactful technological solutions, empowering the next generation of engineers and innovators.",
   },
 ];
 

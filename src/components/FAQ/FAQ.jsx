@@ -6,36 +6,36 @@ const FAQ_DATA = [
   {
     question: "When and where is Robowars happening?",
     answer:
-      "Robowars will be happening during Gravitas and will be from 26th Sep to 28th Sep 2025 at VIT Vellore. Stay tuned for the timings!",
+      "Robowars will occur during GraVITas from 12th to 14th September 2026 at VIT Vellore.",
   },
   {
     question: "Who is eligible to participate?",
     answer:
-      "If you're a part of a team that builds bots and bots follow our regulations.",
+      "If you and your teammates can build bots, you can participate, as long as the bot follows our regulations",
   },
   {
     question: "How long is the event?",
-    answer: "It happens for 4 hours throughout the day for up to 3 days!",
+    answer: "It continues for 3 days, with 4-hour sessions each day.",
   },
   {
     question: "What are the bot specifications?",
     answer:
-      "Bots must comply with the weight and weapon regulations mentioned in the official rulebook.",
+      "Bots must adhere to the weight and weapon specifications outlined in the official rulebook.",
   },
   {
     question: "Can we bring multiple bots under one team?",
     answer:
-      "Yes! A team can bring multiple bots, including 8kg, 15kg, and 60kg categories, as long as they comply with the event rules.",
+      "Yes. A team may register multiple bots across the 8kg, 15kg, and 60kg categories, provided each bot complies with the event rules.",
   },
   {
     question: "What is the maximum and minimum bot weight allowed?",
     answer:
-      "The minimum bot weight category is 8kg and the maximum allowed category is 60kg. Ensure your bot falls within these limits.",
+      "The minimum bot weight is 8kg, and the maximum is 60kg. Your bot must fall within one of the approved weight categories.",
   },
   {
     question: "What are the rules and regulations?",
     answer:
-      "You can download the official rules and regulations PDF from the 'Rulebook' option above.",
+      "You can download the official Rulebook from the 'Rulebook' section above for detailed rules and regulations.",
   },
 ];
 
@@ -47,10 +47,8 @@ const FAQ = () => {
   return (
     <section className="faq" id="faqsection">
       <div className="faq-head reveal" ref={headRef}>
-        <p className="section-kicker">FAQ</p>
-        <h2 className="section-heading">
-          Good <em>questions</em>
-        </h2>
+        <p className="section-kicker">The questions</p>
+        <h2 className="section-heading">FAQs</h2>
       </div>
 
       <div className="faq-list reveal" ref={listRef}>
