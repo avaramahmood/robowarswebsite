@@ -121,6 +121,18 @@
   pointer-events: none; /* prevent image drag interfering with scroll */
 }
 
+.g-slide:nth-child(1) img {
+  object-position: center 0%;
+}
+
+.g-slide:nth-child(2) img {
+  object-position: center 80%;
+}
+
+.g-slide:nth-child(5) img {
+  object-position: center 68%;
+}
+
 /* ---- CTA slide ---- */
 
 .g-cta {

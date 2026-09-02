@@ -1,17 +1,19 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import useReveal from "../../hooks/useReveal";
 import { InstagramIcon } from "../icons/SocialIcons";
+import pic1 from "../../assets/images/pic1.png";
+import pic2 from "../../assets/images/pic2.png";
+import pic3 from "../../assets/images/pic3.jpg";
+import robowars from "../../assets/images/Robowars.png";
+import pic5 from "../../assets/images/pic5.png";
 import "./Gallery.css";
 
-const CDN =
-  "https://res.cloudinary.com/dtuqpup4a/image/upload/fl_preserve_transparency";
-
 const SLIDES = [
-  { type: "image", src: `${CDN}/v1727411412/img1_vxxuqd.jpg?_s=public-apps`, alt: "Combat bots" },
-  { type: "image", src: `${CDN}/v1727411415/img4_cjreoa.jpg?_s=public-apps`, alt: "Arena action" },
-  { type: "image", src: `${CDN}/v1727411419/img3_zxgemk.jpg?_s=public-apps`, alt: "Robot battle" },
-  { type: "image", src: `${CDN}/v1727411417/robovitics_team_hee1en.jpg?_s=public-apps`, alt: "RoboVITics team" },
-  { type: "image", src: `${CDN}/v1727411408/gravitas_vitjpeg_im9ljt.jpg?_s=public-apps`, alt: "graVITas event" },
+  { type: "image", src: pic1, alt: "Combat bots" },
+  { type: "image", src: pic2, alt: "Arena action" },
+  { type: "image", src: pic3, alt: "Robot battle" },
+  { type: "image", src: robowars, alt: "RoboVITics team" },
+  { type: "image", src: pic5, alt: "graVITas event" },
   { type: "cta" },
 ];
 
