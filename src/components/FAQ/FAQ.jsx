@@ -6,7 +6,7 @@ const FAQ_DATA = [
   {
     question: "When and where is Robowars happening?",
     answer:
-      "Robowars will occur during GraVITas from 12th to 14th September 2026 at VIT Vellore.",
+      "Robowars will occur during GraVITas from 18th to 20th September 2026 at VIT Vellore.",
   },
   {
     question: "Who is eligible to participate?",
@@ -15,7 +15,7 @@ const FAQ_DATA = [
   },
   {
     question: "How long is the event?",
-    answer: "It continues for 3 days, with 4-hour sessions each day.",
+    answer: "It spans 3 days, with 12-hour sessions each day.",
   },
   {
     question: "What are the bot specifications?",

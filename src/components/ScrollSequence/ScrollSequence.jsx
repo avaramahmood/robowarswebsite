@@ -3,6 +3,7 @@ import "./ScrollSequence.css";
 
 // graVITas registration portal
 const REGISTER_URL = "https://gravitas.vit.ac.in/";
+const RULEBOOK_URL = "https://drive.google.com/file/d/13-qwpBMRl70-OK-ClE4SRQd8dnJRelLh/view";
 
 // 84 webp frames rendered from the arena flythrough video:
 // top-down logo shot -> camera dives -> the two bots clash at floor level.
@@ -221,7 +222,7 @@ const ScrollSequence = () => {
               <a className="rw-btn" href={REGISTER_URL} target="_blank" rel="noopener noreferrer">
                 Register Now
               </a>
-              <a className="rw-btn rw-btn--ghost" href="https://drive.google.com/uc?export=download&id=1CvdzntBlzWyqLViS8DLlV-l8wyV2ouu-" target="_blank" rel="noopener noreferrer">
+              <a className="rw-btn rw-btn--ghost" href={RULEBOOK_URL} target="_blank" rel="noopener noreferrer">
                 Rulebook
               </a>
             </div>
@@ -265,7 +266,7 @@ const ScrollSequence = () => {
             <a className="rw-btn" href={REGISTER_URL} target="_blank" rel="noopener noreferrer">
               Register Now
             </a>
-            <a className="rw-btn rw-btn--ghost" href="https://drive.google.com/uc?export=download&id=1CvdzntBlzWyqLViS8DLlV-l8wyV2ouu-" target="_blank" rel="noopener noreferrer">
+            <a className="rw-btn rw-btn--ghost" href={RULEBOOK_URL} target="_blank" rel="noopener noreferrer">
               Rulebook
             </a>
           </div>

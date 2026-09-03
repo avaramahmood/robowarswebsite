@@ -19,7 +19,7 @@ const HeroSection = () => {
   }
 
   const handleMatchesClick = () => {
-    navigate("https://drive.google.com/uc?export=download&id=1CvdzntBlzWyqLViS8DLlV-l8wyV2ouu-");
+    navigate("https://drive.google.com/file/d/13-qwpBMRl70-OK-ClE4SRQd8dnJRelLh/view");
   };
 
   useEffect(() => {
