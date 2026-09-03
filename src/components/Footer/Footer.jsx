@@ -3,8 +3,11 @@ import { HashLink as Link } from "react-router-hash-link";
 import {
   InstagramIcon,
   LinkedInIcon,
-  FacebookIcon,
+  XIcon,
+  MediumIcon,
   GlobeIcon,
+  FacebookIcon,
+  EmailIcon,
 } from "../icons/SocialIcons";
 import "./Footer.css";
 
@@ -17,6 +20,11 @@ const NAV = [
 
 const SOCIALS = [
   {
+    href: "https://x.com/robovitics",
+    label: "X",
+    Icon: XIcon,
+  },
+  {
     href: "https://www.instagram.com/robovitics/",
     label: "Instagram",
     Icon: InstagramIcon,
@@ -27,6 +35,11 @@ const SOCIALS = [
     Icon: LinkedInIcon,
   },
   {
+    href: "https://medium.com/@roboviticsvitvellore",
+    label: "Medium",
+    Icon: MediumIcon,
+  },
+  {
     href: "https://robovitics.in/",
     label: "robovitics.in",
     Icon: GlobeIcon,
@@ -35,6 +48,11 @@ const SOCIALS = [
     href: "https://www.facebook.com/robovitics",
     label: "Facebook",
     Icon: FacebookIcon,
+  },
+  {
+    href: "https://mail.google.com/mail/?view=cm&fs=1&to=robovitics@vit.ac.in",
+    label: "Email",
+    Icon: EmailIcon,
   },
 ];
 
