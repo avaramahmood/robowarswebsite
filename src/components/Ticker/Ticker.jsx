@@ -1,13 +1,18 @@
 import React from "react";
 import "./Ticker.css";
 
-// accent: true = red (event names), accent: false = white (action words / separators)
+// accent: true = red, accent: false = white
 const ITEMS = [
+  { text: "VIT VELLORE", accent: false },
+  { text: "BATTLE", accent: true },
+  { text: "ROBOWARS", accent: false },
+  { text: "WRECK", accent: true },
   { text: "FORGE", accent: false },
   { text: "VIT VELLORE", accent: true },
   { text: "BATTLE", accent: false },
   { text: "ROBOWARS", accent: true },
   { text: "WRECK", accent: false },
+  { text: "FORGE", accent: true },
 ];
 
 const Row = () => (

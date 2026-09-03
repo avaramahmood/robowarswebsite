@@ -1,23 +1,14 @@
 import React, { useState } from "react";
 import useReveal from "../../hooks/useReveal";
-import siemensLogo from "../../assets/sponsors/siemens.svg";
 import analogDevicesLogo from "../../assets/sponsors/analogdevices.svg";
 import "./Sponsors.css";
 
 const SPONSORS = [
   {
     tier: "Title Sponsor",
-    src: siemensLogo,
-    alt: "Siemens",
-    scale: 1.7,
-    featured: true,
-  },
-  {
-    tier: "Technology Partner",
     src: analogDevicesLogo,
     alt: "Analog Devices",
-    scale: 0.9,
-    featured: false,
+    featured: true,
   },
 ];
 

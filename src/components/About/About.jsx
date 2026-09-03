@@ -2,7 +2,7 @@ import React from "react";
 import useReveal from "../../hooks/useReveal";
 import arenaImage from "../../assets/images/arena.JPG";
 import roboviticsImage from "../../assets/images/Robovitics.jpeg";
-import gravitasImage from "../../assets/images/gravitas.png";
+import gravitasImage from "../../assets/images/gravitas.jpg";
 import "./About.css";
 
 const ROWS = [

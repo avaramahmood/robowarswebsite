@@ -24,7 +24,7 @@
 
 .sponsors-grid {
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 1fr;
   gap: 1.2rem;
 }
 
@@ -33,12 +33,15 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 2.8rem 3rem;
-  min-height: 280px;
+  padding: 2rem 2.5rem;
+  min-height: 220px;
   background: var(--rw-card);
   border: 1px solid var(--rw-hairline);
   border-radius: 20px;
   overflow: hidden;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transform: translateZ(0);
   transition: border-color 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
     box-shadow 0.4s ease;
 }
@@ -79,31 +82,74 @@
   letter-spacing: 0.3em;
   text-transform: uppercase;
   color: var(--rw-red-light);
+  position: relative;
+  z-index: 2;
 }
 
 .sponsor-card-logo {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   flex: 1;
-  padding: 2rem 0;
+  padding: 1.2rem 0 0.6rem;
+}
+
+/* Subtle, smooth ambient glow behind the logo */
+.sponsor-card-logo::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: clamp(260px, 50%, 480px);
+  height: 120px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(
+    ellipse at center,
+    rgba(192, 18, 42, 0.22) 0%,
+    rgba(192, 18, 42, 0.08) 45%,
+    transparent 72%
+  );
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.6;
+  animation: sponsorLogoGlow 5s ease-in-out infinite alternate;
+  transition: opacity 0.4s ease;
+}
+
+@keyframes sponsorLogoGlow {
+  0% {
+    opacity: 0.45;
+  }
+  100% {
+    opacity: 0.85;
+  }
+}
+
+.sponsor-card:hover .sponsor-card-logo::before {
+  opacity: 1;
 }
 
 .sponsor-card-logo img {
+  position: relative;
+  z-index: 1;
   width: 100%;
-  height: 100%;
-  max-height: 110px;
+  max-width: 400px;
+  max-height: 115px;
+  height: auto;
   object-fit: contain;
-  filter: grayscale(1) brightness(1.9) opacity(0.55);
-  transition: filter 0.45s ease;
+  opacity: 0.75;
+  transition: opacity 0.4s ease;
 }
 
 .sponsor-card:hover .sponsor-card-logo img {
-  filter: grayscale(0) brightness(1) opacity(1);
+  opacity: 1;
 }
 
 .sponsor-card--featured .sponsor-card-logo img {
-  max-height: 130px;
+  max-width: 440px;
+  max-height: 125px;
 }
 
 /* ---- CTA with email input ---- */
@@ -173,6 +219,22 @@
     grid-template-columns: 1fr;
   }
 
+  .sponsor-card {
+    padding: 1.8rem 2rem;
+    min-height: 200px;
+  }
+
+  .sponsor-card-logo img,
+  .sponsor-card--featured .sponsor-card-logo img {
+    max-width: 360px;
+    max-height: 105px;
+  }
+
+  .sponsor-card-logo::before {
+    width: clamp(240px, 55%, 380px);
+    height: 105px;
+  }
+
   .sponsors-cta {
     flex-direction: column;
     align-items: flex-start;
@@ -200,11 +262,28 @@
   }
 
   .sponsor-card {
-    padding: 1.8rem 1.6rem;
-    min-height: 200px;
+    padding: 1.5rem 1.4rem;
+    min-height: 175px;
+    border-radius: 16px;
+  }
+
+  .sponsor-card-logo {
+    padding: 0.8rem 0 0.3rem;
+  }
+
+  .sponsor-card-logo img,
+  .sponsor-card--featured .sponsor-card-logo img {
+    max-width: 260px;
+    max-height: 75px;
+  }
+
+  .sponsor-card-logo::before {
+    width: 220px;
+    height: 75px;
   }
 
   .sponsors-cta {
     padding: 1.8rem 1.6rem;
+    border-radius: 16px;
   }
 }
