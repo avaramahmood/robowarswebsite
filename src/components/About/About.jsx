@@ -18,7 +18,7 @@ const ROWS = [
     title: "RoboVITics",
     kicker: "The Organizers",
     image: roboviticsImage,
-    text: "RoboVITics is VIT Vellore’s founding and most formidable technical institution, and a premier community of innovators dedicated to robotics, automation, and innovation. Comprising a community of technology enthusiasts, the club is committed to relentless research, developing advanced autonomous systems, and competitively implementing solutions that set the standard for robotics and automation.",
+    text: "RoboVITics is one of the largest and most active technical elite clubs of VIT, Vellore, dedicated to robotics, automation, and innovation. Comprising a community of technology enthusiasts, the club is committed to relentless research, developing advanced autonomous systems, and competitively implementing solutions that set the standard for robotics and automation.",
   },
   {
     index: "03",
