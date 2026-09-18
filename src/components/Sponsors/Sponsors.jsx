@@ -9,6 +9,7 @@ const SPONSORS = [
     src: analogDevicesLogo,
     alt: "Analog Devices",
     featured: true,
+    url: "https://www.analog.com/",
   },
 ];
 
@@ -52,9 +53,12 @@ const Sponsors = () => {
 
         <div className="sponsors-grid reveal" ref={gridRef}>
           {SPONSORS.map((s) => (
-            <div
-              className={`sponsor-card ${s.featured ? "sponsor-card--featured" : ""}`}
-              key={s.alt}
+            <a
+             href={s.url}
+             target="_blank"
+             rel="noopener noreferrer"
+            className={`sponsor-card ${s.featured ? "sponsor-card--featured" : ""}`}
+            key={s.alt}
             >
               <p className="sponsor-card-tier">{s.tier}</p>
               <div className="sponsor-card-logo">
@@ -64,7 +68,7 @@ const Sponsors = () => {
                   style={s.scale ? { transform: `scale(${s.scale})` } : undefined}
                 />
               </div>
-            </div>
+            </a>
           ))}
         </div>
 
