@@ -19,8 +19,11 @@ const HeroSection = () => {
   }
 
   const handleMatchesClick = () => {
-    navigate("https://drive.google.com/file/d/13-qwpBMRl70-OK-ClE4SRQd8dnJRelLh/view");
-  };
+  window.open(
+    "https://drive.google.com/file/d/1OPk3XuirPJt4tJ_RndIDBgOIiKh5yewC/view",
+    "_blank"
+  );
+};
 
   useEffect(() => {
     const scene = new THREE.Scene();
